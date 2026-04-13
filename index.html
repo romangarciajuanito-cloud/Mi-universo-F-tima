@@ -30,7 +30,7 @@
                 content-visibility: auto;
             }
             .star {
-                @apply absolute rounded-full bg-star opacity-0;
+                @apply absolute rounded-full bg-white;
             }
             .nebula {
                 @apply absolute rounded-full blur-3xl opacity-30;
@@ -42,24 +42,28 @@
             .galaxy {
                 @apply absolute rounded-full;
                 transform-style: preserve-3d;
+                width: 200%;
+                height: 200%;
+                left: 50%;
+                top: 50%;
             }
         }
     </style>
 </head>
 <body class="bg-space text-white min-h-screen overflow-hidden flex items-center justify-center">
-    <!-- Contenedor de galaxia 360° -->
+    <!-- Contenedor de galaxia 360° (Arreglado) -->
     <div class="galaxy-container" id="galaxyContainer">
-        <div class="galaxy absolute w-[200%] h-[200%] left-1/2 top-1/2" id="galaxy" style="transform: translate(-50%, -50%);">
+        <div class="galaxy" id="galaxy">
             <!-- Las partículas se generarán con JavaScript -->
         </div>
     </div>
     
-    <!-- Nebulosas de fondo -->
+    <!-- Nebulosas de fondo (Mantiene igual) -->
     <div class="nebula bg-nebula1 w-[500px] h-[500px] top-[10%] left-[15%] animate-pulse"></div>
     <div class="nebula bg-nebula2 w-[400px] h-[400px] bottom-[20%] right-[10%] animate-pulse" style="animation-delay: 1.5s"></div>
     <div class="nebula bg-nebula1 w-[300px] h-[300px] top-[50%] right-[30%] animate-pulse" style="animation-delay: 0.8s"></div>
     
-    <!-- Contenido principal (EXACTAMENTE igual al anterior) -->
+    <!-- Contenido principal (EXACTAMENTE igual a la imagen) -->
     <div class="relative z-10 text-center px-6 py-12 bg-black/20 backdrop-blur-md rounded-2xl border border-white/10 max-w-lg mx-4 shadow-[0_0_50px_rgba(236,72,153,0.3)]">
         <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-love to-purple-400">
             Para mi querida Fátima
@@ -115,13 +119,14 @@
     </style>
 
     <script>
-        // Generación de galaxia 3D en el fondo
+        // Generación de galaxia 3D (Arreglada para que se vea)
         document.addEventListener('DOMContentLoaded', function() {
             const galaxy = document.getElementById('galaxy');
             const starCount = 800;
             
-            // Agregar clase de rotación
+            // Agregar clase de rotación y posición
             galaxy.classList.add('rotate-slow');
+            galaxy.style.transform = 'translate(-50%, -50%)';
             
             // Colores para las estrellas de la galaxia
             const colors = ['#FDE68A', '#BFDBFE', '#DDD6FE', '#FBCFE8', '#FFFFFF'];
