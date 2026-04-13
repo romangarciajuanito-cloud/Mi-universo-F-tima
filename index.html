@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amor Cósmico para Fátima</title>
+    <title>Universo de Amor para Fátima</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -11,11 +11,11 @@
             theme: {
                 extend: {
                     colors: {
-                        space: '#0F172A',
-                        nebula1: '#4C1D95',
-                        nebula2: '#701A75',
-                        star: '#FDE68A',
-                        love: '#EC4899',
+                        space: '#020617',
+                        nebula1: '#312E81',
+                        nebula2: '#831843',
+                        star: '#FEF3C7',
+                        love: '#F472B6',
                     },
                     fontFamily: {
                         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -30,72 +30,79 @@
                 content-visibility: auto;
             }
             .star {
-                @apply absolute rounded-full bg-white;
+                @apply absolute rounded-full bg-star;
             }
-            .nebula {
-                @apply absolute rounded-full blur-3xl opacity-30;
+            .planet {
+                @apply absolute rounded-full opacity-80;
             }
-            .galaxy-container {
-                @apply absolute inset-0 overflow-hidden -z-10;
-                perspective: 1000px;
-            }
-            .galaxy {
-                @apply absolute rounded-full;
-                transform-style: preserve-3d;
-                width: 200%;
-                height: 200%;
-                left: 50%;
-                top: 50%;
+            .word-item {
+                @apply absolute text-white/90 font-medium tracking-wider transition-all duration-300;
+                text-shadow: 0 0 8px rgba(255,255,255,0.4);
             }
         }
     </style>
 </head>
 <body class="bg-space text-white min-h-screen overflow-hidden flex items-center justify-center">
-    <!-- Contenedor de galaxia 360° (Arreglado) -->
-    <div class="galaxy-container" id="galaxyContainer">
-        <div class="galaxy" id="galaxy">
-            <!-- Las partículas se generarán con JavaScript -->
+    <!-- Contenedor principal de universo 360° -->
+    <div class="absolute inset-0 overflow-hidden" id="universeContainer">
+        <!-- Estrellas de fondo parpadeantes -->
+        <div id="stars-bg" class="absolute inset-0"></div>
+        
+        <!-- Galaxia central rotatoria -->
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300vw] h-[300vw]">
+            <div id="galaxy" class="absolute w-full h-full rounded-full" style="background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(59, 130, 246, 0.05) 40%, transparent 70%); transform-style: preserve-3d;"></div>
         </div>
+        
+        <!-- Palabras bonitas alrededor -->
+        <div id="words-container" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] max-w-[500px] max-h-[500px] rounded-full">
+            <span class="word-item" style="top: 0%; left: 50%; transform: translateX(-50%)">Belleza</span>
+            <span class="word-item" style="top: 15%; right: 10%;">Alegría</span>
+            <span class="word-item" style="top: 15%; left: 10%;">Esperanza</span>
+            <span class="word-item" style="top: 40%; right: 0%; transform: translateY(-50%)">Magia</span>
+            <span class="word-item" style="top: 40%; left: 0%; transform: translateY(-50%)">Ternura</span>
+            <span class="word-item" style="bottom: 15%; right: 10%;">Dulzura</span>
+            <span class="word-item" style="bottom: 15%; left: 10%;">Armonía</span>
+            <span class="word-item" style="bottom: 0%; left: 50%; transform: translateX(-50%)">Felicidad</span>
+            <span class="word-item" style="top: 30%; right: 25%;">Brillo</span>
+            <span class="word-item" style="top: 30%; left: 25%;">Ilusión</span>
+            <span class="word-item" style="bottom: 30%; right: 25%;">Encanto</span>
+            <span class="word-item" style="bottom: 30%; left: 25%;">Sueño</span>
+        </div>
+        
+        <!-- Planetas y cuerpos celestes -->
+        <div class="planet w-4 h-4 bg-yellow-300 top-[20%] left-[20%]"></div>
+        <div class="planet w-3 h-3 bg-blue-300 top-[30%] right-[25%]"></div>
+        <div class="planet w-5 h-5 bg-pink-300 bottom-[25%] left-[30%]"></div>
+        <div class="planet w-2 h-2 bg-purple-300 bottom-[20%] right-[20%]"></div>
     </div>
     
-    <!-- Nebulosas de fondo (Mantiene igual) -->
-    <div class="nebula bg-nebula1 w-[500px] h-[500px] top-[10%] left-[15%] animate-pulse"></div>
-    <div class="nebula bg-nebula2 w-[400px] h-[400px] bottom-[20%] right-[10%] animate-pulse" style="animation-delay: 1.5s"></div>
-    <div class="nebula bg-nebula1 w-[300px] h-[300px] top-[50%] right-[30%] animate-pulse" style="animation-delay: 0.8s"></div>
-    
-    <!-- Contenido principal (EXACTAMENTE igual a la imagen) -->
-    <div class="relative z-10 text-center px-6 py-12 bg-black/20 backdrop-blur-md rounded-2xl border border-white/10 max-w-lg mx-4 shadow-[0_0_50px_rgba(236,72,153,0.3)]">
-        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-love to-purple-400">
-            Para mi querida Fátima
+    <!-- Mensaje central renovado -->
+    <div class="relative z-10 text-center px-6 py-10 bg-black/30 backdrop-blur-lg rounded-3xl border border-white/20 max-w-sm mx-4 shadow-[0_0_60px_rgba(244,114,182,0.4)]">
+        <h1 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-5 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+            Para mi estrella favorita
         </h1>
         
-        <div class="my-8 relative">
+        <div class="my-7 relative">
             <div class="inline-block relative">
-                <i class="fa fa-heart text-7xl text-love animate-pulse" style="text-shadow: 0 0 20px rgba(236,72,153,0.7);"></i>
+                <i class="fa fa-heart text-7xl text-love animate-pulse" style="text-shadow: 0 0 25px rgba(244,114,182,0.8);"></i>
                 <div class="absolute inset-0 animate-ping-slow opacity-70">
                     <i class="fa fa-heart text-7xl text-love/50"></i>
                 </div>
             </div>
         </div>
         
-        <p class="text-lg md:text-xl mb-6 leading-relaxed text-white/90">
-            En este universo infinito, entre millones de estrellas y galaxias lejanas, tú eres la luz que ilumina mi camino, la gravedad que mantiene mis pies en la tierra y el destino que siempre quise encontrar. Fátima, cada estrella brilla con un pedazo de mi amor por ti.
+        <p class="text-lg md:text-xl mb-6 leading-relaxed text-white/95 font-light">
+            Fátima, en este universo inmenso lleno de maravillas, tú eres la creación más hermosa que existe. Cada estrella cuenta una historia, pero la nuestra brilla con luz propia, iluminando cada rincón de mi vida.
         </p>
         
         <p class="text-love font-semibold text-xl">
-            Te amo más allá de las estrellas 🌌💫
+                    Eres mi todo, hoy y siempre ✨💖
         </p>
-        
-        <div class="mt-8 flex justify-center gap-3">
-            <span class="text-xs bg-white/10 px-3 py-1 rounded-full">Infinito</span>
-            <span class="text-xs bg-white/10 px-3 py-1 rounded-full">Galaxias</span>
-            <span class="text-xs bg-white/10 px-3 py-1 rounded-full">Destino</span>
-        </div>
     </div>
 
     <style>
         @keyframes twinkle {
-            0%, 100% { opacity: 0; }
+            0%, 100% { opacity: 0.2; }
             50% { opacity: 1; }
         }
         
@@ -108,30 +115,36 @@
             animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
         }
         
-        @keyframes rotate-galaxy {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
+        @keyframes rotate-universe {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
-        .rotate-slow {
-            animation: rotate-galaxy 60s linear infinite;
+        .rotate-universe {
+            animation: rotate-universe 80s linear infinite;
+        }
+        
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse-slow 5s ease-in-out infinite;
         }
     </style>
 
     <script>
-        // Generación de galaxia 3D (Arreglada para que se vea)
+        // Generación de universo animado
         document.addEventListener('DOMContentLoaded', function() {
+            const starsBg = document.getElementById('stars-bg');
             const galaxy = document.getElementById('galaxy');
-            const starCount = 800;
+            const starCount = 200;
             
-            // Agregar clase de rotación y posición
-            galaxy.classList.add('rotate-slow');
-            galaxy.style.transform = 'translate(-50%, -50%)';
+            // Aplicar rotación al universo completo
+            galaxy.classList.add('rotate-universe');
             
-            // Colores para las estrellas de la galaxia
-            const colors = ['#FDE68A', '#BFDBFE', '#DDD6FE', '#FBCFE8', '#FFFFFF'];
-            
-            // Crear estrellas de la galaxia
+            // Generar estrellas de fondo
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
@@ -141,28 +154,25 @@
                 star.style.width = size;
                 star.style.height = size;
                 
-                // Posición en forma de espiral
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * Math.random() * 45 + 5;
-                const x = Math.cos(angle) * distance + '%';
-                const y = Math.sin(angle) * distance + '%';
+                // Posición aleatoria
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
                 
-                star.style.left = x;
-                star.style.top = y;
+                // Animación
+                const duration = Math.random() * 4 + 2 + 's';
+                const delay = Math.random() * 3 + 's';
+                star.style.animation = `twinkle ${duration} ease-in-out ${delay} infinite`;
                 
-                // Color aleatorio
-                const colorIndex = Math.floor(Math.random() * colors.length);
-                star.style.backgroundColor = colors[colorIndex];
-                
-                // Brillo variable
-                star.style.opacity = Math.random() * 0.7 + 0.3;
-                
-                // Profundidad 3D
-                const z = (Math.random() * 100) - 50;
-                star.style.transform = `translateZ(${z}px)`;
-                
-                galaxy.appendChild(star);
+                starsBg.appendChild(star);
             }
+            
+            // Animación para las palabras
+            const words = document.querySelectorAll('.word-item');
+            words.forEach(word => {
+                word.classList.add('animate-pulse-slow');
+                const delay = Math.random() * 2 + 's';
+                word.style.animationDelay = delay;
+            });
         });
     </script>
 </body>
