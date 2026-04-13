@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universo de Amor para Fátima</title>
+    <title>Juego: ¿Cuánto te quiero Fátima?</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -32,71 +32,98 @@
             .star {
                 @apply absolute rounded-full bg-star;
             }
-            .planet {
-                @apply absolute rounded-full opacity-80;
+            .option-btn {
+                @apply w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/20 transition-all border border-white/10 hover:border-white/30 backdrop-blur-sm text-white text-left;
             }
-            .word-item {
-                @apply absolute text-white/90 font-medium tracking-wider transition-all duration-300;
-                text-shadow: 0 0 8px rgba(255,255,255,0.4);
+            .correct {
+                @apply bg-green-500/30 border-green-400/50;
+            }
+            .incorrect {
+                @apply bg-red-500/30 border-red-400/50;
             }
         }
     </style>
 </head>
 <body class="bg-space text-white min-h-screen overflow-hidden flex items-center justify-center">
-    <!-- Contenedor principal de universo 360° -->
-    <div class="absolute inset-0 overflow-hidden" id="universeContainer">
-        <!-- Estrellas de fondo parpadeantes -->
+    <!-- Fondo de universo -->
+    <div class="absolute inset-0 overflow-hidden -z-10" id="universeContainer">
         <div id="stars-bg" class="absolute inset-0"></div>
-        
-        <!-- Galaxia central rotatoria -->
         <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300vw] h-[300vw]">
             <div id="galaxy" class="absolute w-full h-full rounded-full" style="background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(59, 130, 246, 0.05) 40%, transparent 70%); transform-style: preserve-3d;"></div>
         </div>
-        
-        <!-- Palabras bonitas alrededor -->
-        <div id="words-container" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] max-w-[500px] max-h-[500px] rounded-full">
-            <span class="word-item" style="top: 0%; left: 50%; transform: translateX(-50%)">Belleza</span>
-            <span class="word-item" style="top: 15%; right: 10%;">Alegría</span>
-            <span class="word-item" style="top: 15%; left: 10%;">Esperanza</span>
-            <span class="word-item" style="top: 40%; right: 0%; transform: translateY(-50%)">Magia</span>
-            <span class="word-item" style="top: 40%; left: 0%; transform: translateY(-50%)">Ternura</span>
-            <span class="word-item" style="bottom: 15%; right: 10%;">Dulzura</span>
-            <span class="word-item" style="bottom: 15%; left: 10%;">Armonía</span>
-            <span class="word-item" style="bottom: 0%; left: 50%; transform: translateX(-50%)">Felicidad</span>
-            <span class="word-item" style="top: 30%; right: 25%;">Brillo</span>
-            <span class="word-item" style="top: 30%; left: 25%;">Ilusión</span>
-            <span class="word-item" style="bottom: 30%; right: 25%;">Encanto</span>
-            <span class="word-item" style="bottom: 30%; left: 25%;">Sueño</span>
-        </div>
-        
-        <!-- Planetas y cuerpos celestes -->
-        <div class="planet w-4 h-4 bg-yellow-300 top-[20%] left-[20%]"></div>
-        <div class="planet w-3 h-3 bg-blue-300 top-[30%] right-[25%]"></div>
-        <div class="planet w-5 h-5 bg-pink-300 bottom-[25%] left-[30%]"></div>
-        <div class="planet w-2 h-2 bg-purple-300 bottom-[20%] right-[20%]"></div>
     </div>
     
-    <!-- Mensaje central renovado -->
-    <div class="relative z-10 text-center px-6 py-10 bg-black/30 backdrop-blur-lg rounded-3xl border border-white/20 max-w-sm mx-4 shadow-[0_0_60px_rgba(244,114,182,0.4)]">
-        <h1 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-5 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
-            Para mi estrella favorita
+    <!-- Pantalla de inicio -->
+    <div id="start-screen" class="relative z-10 text-center px-6 py-10 bg-black/40 backdrop-blur-lg rounded-3xl border border-white/20 max-w-sm mx-4 shadow-[0_0_60px_rgba(244,114,182,0.4)]">
+        <h1 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold mb-5 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+            ¡Bienvenida Fátima!
         </h1>
+        
+        <div class="my-7">
+            <i class="fa fa-heart text-7xl text-love animate-pulse" style="text-shadow: 0 0 25px rgba(244,114,182,0.8);"></i>
+        </div>
+        
+        <p class="text-lg mb-8 leading-relaxed text-white/95">
+            He preparado este juego para demostrarte lo mucho que significas para mí. Tendrás que responder unas preguntas sencillas para descubrir cuánto te quiero.
+        </p>
+        
+        <button id="start-btn" class="px-8 py-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transition-all text-white font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            ¡Empezar a jugar!
+        </button>
+    </div>
+    
+    <!-- Pantalla de juego -->
+    <div id="game-screen" class="hidden relative z-10 text-center px-6 py-10 bg-black/40 backdrop-blur-lg rounded-3xl border border-white/20 max-w-sm mx-4 shadow-[0_0_60px_rgba(244,114,182,0.4)]">
+        <div id="question-container">
+            <h2 id="question-title" class="text-xl font-bold mb-4 text-white/90">Pregunta 1</h2>
+            <p id="question-text" class="text-lg mb-6">¿Cuánto crees que te quiero?</p>
+            
+            <div id="options-container" class="space-y-3 mb-8">
+                <button class="option-btn">Un poquito</button>
+                <button class="option-btn">Mucho</button>
+                <button class="option-btn">Inmensamente</button>
+                <button class="option-btn">Más allá de las estrellas</button>
+            </div>
+        </div>
+        
+        <div id="feedback" class="hidden mb-6 p-3 rounded-xl bg-white/10 backdrop-blur-sm"></div>
+        
+        <button id="next-btn" class="hidden w-full py-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 transition-all text-white font-semibold shadow-lg">
+            Siguiente pregunta
+        </button>
+        
+        <div class="mt-4 text-xs text-white/50">
+            <span id="current-question">1</span>/5
+        </div>
+    </div>
+    
+    <!-- Pantalla final -->
+    <div id="final-screen" class="hidden relative z-10 text-center px-6 py-10 bg-black/40 backdrop-blur-lg rounded-3xl border border-white/20 max-w-sm mx-4 shadow-[0_0_60px_rgba(244,114,182,0.4)]">
+        <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold mb-5 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">
+            ¡Lo lograste!
+        </h2>
         
         <div class="my-7 relative">
             <div class="inline-block relative">
-                <i class="fa fa-heart text-7xl text-love animate-pulse" style="text-shadow: 0 0 25px rgba(244,114,182,0.8);"></i>
+                <i class="fa fa-heart text-8xl text-love animate-pulse" style="text-shadow: 0 0 30px rgba(244,114,182,1);"></i>
                 <div class="absolute inset-0 animate-ping-slow opacity-70">
-                    <i class="fa fa-heart text-7xl text-love/50"></i>
+                    <i class="fa fa-heart text-8xl text-love/50"></i>
                 </div>
             </div>
         </div>
         
-        <p class="text-lg md:text-xl mb-6 leading-relaxed text-white/95 font-light">
-            Fátima, en este universo inmenso lleno de maravillas, tú eres la creación más hermosa que existe. Cada estrella cuenta una historia, pero la nuestra brilla con luz propia, iluminando cada rincón de mi vida.
+        <p class="text-lg mb-6 leading-relaxed text-white/95">
+            Fátima, ahora ya sabes cuánto te quiero:
         </p>
         
-        <p class="text-love font-semibold text-xl">
-                    Eres mi todo, hoy y siempre ✨💖
+        <div class="bg-white/10 p-4 rounded-xl mb-6 backdrop-blur-sm">
+            <p class="text-xl font-semibold text-love">
+                Te quiero más que a las estrellas del universo, más que a los granos de arena de todos los planetas y más que a toda la belleza que existe en el cosmos. ¡Eres mi todo!
+            </p>
+        </div>
+        
+        <p class="text-white/80 text-sm">
+            Gracias por ser la luz que ilumina mi camino. ❤️
         </p>
     </div>
 
@@ -123,25 +150,59 @@
         .rotate-universe {
             animation: rotate-universe 80s linear infinite;
         }
-        
-        @keyframes pulse-slow {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-        
-        .animate-pulse-slow {
-            animation: pulse-slow 5s ease-in-out infinite;
-        }
     </style>
 
     <script>
-        // Generación de universo animado
+        // Preguntas y respuestas
+        const questions = [
+            {
+                title: "Nivel 1: El inicio",
+                text: "¿Cuánto crees que te quiero?",
+                options: ["Un poquito", "Mucho", "Inmensamente", "Más allá de las estrellas"],
+                correctIndex: 3,
+                feedback: "¡Correcto! Pero esto es solo el comienzo..."
+            },
+            {
+                title: "Nivel 2: La magnitud",
+                text: "¿Con qué compararía mi amor por ti?",
+                options: ["Con una montaña", "Con el océano", "Con el universo entero", "Con una casa"],
+                correctIndex: 2,
+                feedback: "¡Exacto! Mi amor es tan grande que no cabe en la Tierra..."
+            },
+            {
+                title: "Nivel 3: El tiempo",
+                text: "¿Cuánto tiempo te voy a querer?",
+                options: ["Un mes", "Un año", "Diez años", "Toda la eternidad"],
+                correctIndex: 3,
+                feedback: "¡Muy bien! El tiempo no existe cuando se trata de ti..."
+            },
+            {
+                title: "Nivel 4: La importancia",
+                text: "¿Qué eres tú para mí?",
+                options: ["Una amiga", "Una persona especial", "El amor de mi vida", "Mi mundo entero"],
+                correctIndex: 3,
+                feedback: "¡Acertaste! Eres todo lo que siempre he buscado..."
+            },
+            {
+                title: "Nivel Final: La verdad",
+                text: "¿Cuánto te quiero realmente?",
+                options: ["No tengo palabras para explicarlo", "Más que a mi vida", "Más que a nada en este mundo", "Todo lo anterior y mucho más"],
+                correctIndex: 3,
+                feedback: "¡Perfecto! Has descubierto la verdad..."
+            }
+        ];
+        
+        // Variables de control
+        let currentQuestion = 0;
+        let answered = false;
+        
+        // Inicialización
         document.addEventListener('DOMContentLoaded', function() {
             const starsBg = document.getElementById('stars-bg');
             const galaxy = document.getElementById('galaxy');
             const starCount = 200;
             
-            // Aplicar rotación al universo completo
+            // Aplicar rotación al universo
             galaxy.classList.add('rotate-universe');
             
             // Generar estrellas de fondo
@@ -166,14 +227,99 @@
                 starsBg.appendChild(star);
             }
             
-            // Animación para las palabras
-            const words = document.querySelectorAll('.word-item');
-            words.forEach(word => {
-                word.classList.add('animate-pulse-slow');
-                const delay = Math.random() * 2 + 's';
-                word.style.animationDelay = delay;
+            // Eventos
+            document.getElementById('start-btn').addEventListener('click', startGame);
+            document.getElementById('next-btn').addEventListener('click', nextQuestion);
+            
+            // Eventos para las opciones (se agregan dinámicamente)
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('option-btn') && !answered) {
+                    checkAnswer(e.target);
+                }
             });
         });
+        
+        // Iniciar juego
+        function startGame() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            loadQuestion();
+        }
+        
+        // Cargar pregunta actual
+        function loadQuestion() {
+            answered = false;
+            const question = questions[currentQuestion];
+            
+            document.getElementById('question-title').textContent = question.title;
+            document.getElementById('question-text').textContent = question.text;
+            document.getElementById('current-question').textContent = currentQuestion + 1;
+            
+            // Limpiar opciones anteriores
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            // Crear nuevas opciones
+            question.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.textContent = option;
+                button.dataset.index = index;
+                optionsContainer.appendChild(button);
+            });
+            
+            // Ocultar elementos
+            document.getElementById('feedback').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+        }
+        
+        // Verificar respuesta
+        function checkAnswer(selectedBtn) {
+            const selectedIndex = parseInt(selectedBtn.dataset.index);
+            const question = questions[currentQuestion];
+            const allOptions = document.querySelectorAll('.option-btn');
+            
+            // Marcar respuesta seleccionada
+            if (selectedIndex === question.correctIndex) {
+                selectedBtn.classList.add('correct');
+                showFeedback(question.feedback, true);
+            } else {
+                selectedBtn.classList.add('incorrect');
+                showFeedback("¡Casi! Inténtalo de nuevo.", false);
+            }
+            
+            // Marcar respuesta correcta
+            allOptions[question.correctIndex].classList.add('correct');
+            
+            answered = true;
+        }
+        
+        // Mostrar retroalimentación
+        function showFeedback(text, isCorrect) {
+            const feedbackEl = document.getElementById('feedback');
+            feedbackEl.textContent = text;
+            feedbackEl.classList.remove('hidden');
+            feedbackEl.classList.add(isCorrect ? 'text-green-300' : 'text-yellow-300');
+            
+            document.getElementById('next-btn').classList.remove('hidden');
+        }
+        
+        // Pasar a la siguiente pregunta
+        function nextQuestion() {
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                endGame();
+            }
+        }
+        
+        // Finalizar juego
+        function endGame() {
+            document.getElementById('game-screen').classList.add('hidden');
+            document.getElementById('final-screen').classList.remove('hidden');
+        }
     </script>
 </body>
 </html>
